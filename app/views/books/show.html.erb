@@ -1,0 +1,24 @@
+<%= render 'books/info', book: @books,user:@user %>
+
+    <div class="col-md-8 offset-md-1">
+      <h2>Book detail</h2>
+      <table class="table table-hover table-inverese">
+        <tbody>
+          <tr>
+            <td><%= link_to attachment_image_tag(@user, :profile_image, :fill,50,50, fallback: "no_image.jpg", class: "img-circle pull-left profile-thumb",size: '40x40'),user_path(@user) %>
+            <%= link_to @user.name, "/users/#{@user.id}" %>
+            </td>
+            <td><%= link_to @book.title, "/books/#{@book.id}" %></td>
+            <td><%= @book.body %></td>
+            <% if @user.id == current_user.id %>
+              <td colspan="3"><%= link_to "Edit",edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
+              <td colspan="3"><%= link_to "Destroy",book_path(@book), class: "btn btn-sm btn-danger", "data-confirm" => "本当に削除しますか？" , method: :delete %></td>
+            <% else %>
+              <td colspan="3"></td>
+              <td colspan="3"></td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
